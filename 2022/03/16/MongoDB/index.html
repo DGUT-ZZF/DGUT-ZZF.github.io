@@ -1,0 +1,666 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MongoDB | 傻瓜の博客</title><meta name="keywords" content="MongoDB"><meta name="author" content="Kirito,541039648@qq.com"><meta name="copyright" content="Kirito"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB">
+<meta property="og:url" content="https://dgut-zzf.github.io/2022/03/16/MongoDB/index.html">
+<meta property="og:site_name" content="傻瓜の博客">
+<meta property="og:description" content="MongoDB">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dgut-zzf.github.io/img/avatar/%E8%9D%B6%E7%A5%882.gif">
+<meta property="article:published_time" content="2022-03-16T08:17:02.000Z">
+<meta property="article:modified_time" content="2022-07-10T03:52:38.397Z">
+<meta property="article:author" content="Kirito">
+<meta property="article:tag" content="MongoDB">
+<meta property="article:tag" content="DataBase">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dgut-zzf.github.io/img/avatar/%E8%9D%B6%E7%A5%882.gif"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://dgut-zzf.github.io/2022/03/16/MongoDB/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//www.clarity.ms"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?07f5446655e9ab8c8f43c3f215d27a1b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-2MDKV7YRZQ"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-2MDKV7YRZQ');
+</script><script>(function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "89wndti20j");</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":1,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":30},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Kirito","link":"链接: ","source":"来源: 傻瓜の博客","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'MongoDB',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-07-10 11:52:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="/css/prettify.css"><script src="/js/prettify.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/avatar/%E8%9D%B6%E7%A5%882.gif" onerror="onerror=null;src='/img/background/蝶祈2.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">44</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">39</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">傻瓜の博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">MongoDB</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-16T08:17:02.000Z" title="发表于 2022-03-16 16:17:02">2022-03-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-07-10T03:52:38.397Z" title="更新于 2022-07-10 11:52:38">2022-07-10</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/DataBase/">DataBase</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>31分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="MongoDB"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div><article class="post-content" id="article-container"><h1 id="Centos7安装mongodb"><a href="#Centos7安装mongodb" class="headerlink" title="Centos7安装mongodb"></a>Centos7安装mongodb</h1><h2 id="前往官网下载mongodb的tgz包"><a href="#前往官网下载mongodb的tgz包" class="headerlink" title="前往官网下载mongodb的tgz包"></a>前往官网下载mongodb的tgz包</h2><blockquote>
+<p>选择centos7下的4.4版本tgz包 –&gt; <a target="_blank" rel="noopener" href="https://www.mongodb.com/try/download/community">官网</a></p>
+</blockquote>
+<p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220316170848.png"></p>
+<h2 id="上传至服务器【目录自选】"><a href="#上传至服务器【目录自选】" class="headerlink" title="上传至服务器【目录自选】"></a>上传至服务器【目录自选】</h2><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220316172954.png"></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">使用tar -zxvf 目标压缩包 -C 目标目录</span></span><br><span class="line">sudo tar -zxvf mongodb-linux-x86_64-rhel70-4.4.13.tgz -C /usr/local/</span><br><span class="line"><span class="meta">#</span><span class="bash">重新命名</span></span><br><span class="line">sudo mv /usr/local/mongodb-linux-x86_64-rhel70-4.4.13/ /usr/local/mongodb</span><br></pre></td></tr></table></figure>
+<p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220316174031.png"></p>
+<h2 id="创建数据库目录"><a href="#创建数据库目录" class="headerlink" title="创建数据库目录"></a>创建数据库目录</h2><p>默认情况下 MongoDB 启动后会初始化以下两个目录：</p>
+<ul>
+<li>数据存储目录：/var/lib/mongodb</li>
+<li>日志文件目录：/var/log/mongodb</li>
+</ul>
+<p>我们在mongodb目录下创建对应对应的数据以及日志文件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd /usr/local/mongodb</span><br><span class="line"><span class="meta">#</span><span class="bash">创建存放数据的目录</span></span><br><span class="line">sudo mkdir -p data/db</span><br><span class="line"><span class="meta">#</span><span class="bash">创建存放日志的目录</span></span><br><span class="line">sudo mkdir -p logs</span><br><span class="line"><span class="meta">#</span><span class="bash">创建日志记录文件</span></span><br><span class="line"> sudo touch /usr/local/mongodb/logs/mongodb.log</span><br></pre></td></tr></table></figure>
+<h2 id="前台启动"><a href="#前台启动" class="headerlink" title="前台启动"></a>前台启动</h2><p>MongoDB的默认启动方式为前台启动。所谓的前台启动就是MongoDB启动进程后会占用当前的终端窗口。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">切换至指定目录</span></span><br><span class="line">cd /usr/local/mongodb</span><br><span class="line"><span class="meta">#</span><span class="bash">前台启动</span></span><br><span class="line">bin/mongod --dbpath /usr/local/mongodb/data/db/ --logpath /usr/local/mongodb/logs/mongodb.log  --logappend --port 27017 --bind_ip 0.0.0.0</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>--dbpath</code>：指定数据文件存放目录</li>
+<li><code>--logpath</code>：指定日志文件，注意指定文件不是目录</li>
+<li><code>--logappend</code>：使用追加的方式记录日志</li>
+<li><code>--port</code>：指定端口，默认为27017</li>
+<li><code>--bind_ip</code>：绑定服务IP，若绑定127.0.0.1，则只能本机访问，默认为本机地址</li>
+</ul>
+<h2 id="后台启动"><a href="#后台启动" class="headerlink" title="后台启动"></a>后台启动</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">切换至指定目录</span></span><br><span class="line">cd /usr/local/mongodb</span><br><span class="line"><span class="meta">#</span><span class="bash">后台启动</span></span><br><span class="line">bin/mongod --dbpath /usr/local/mongodb/data/db/ --logpath /usr/local/mongodb/logs/mongodb.log  --logappend --port 27017 --bind_ip 0.0.0.0 --fork</span><br></pre></td></tr></table></figure>
+<p>如果想关掉后台服务只需要尾部添加<code>--shutdown</code></p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#数据文件存放目录</span><br><span class="line">dbpath=/usr/local/mongodb/data/db</span><br><span class="line">#日志文件存放目录</span><br><span class="line">logpath=/usr/local/mongodb/logs/mongodb.log</span><br><span class="line">#以追加的方式记录日志</span><br><span class="line">logappend=true</span><br><span class="line">#端口默认为27017</span><br><span class="line">port=27017</span><br><span class="line">#对访问IP地址不做限制，默认为本机地址</span><br><span class="line">bind_ip=0.0.0.0</span><br><span class="line">#以守护进程的方式启用，即在后台运行</span><br><span class="line">fork=true</span><br></pre></td></tr></table></figure>
+<p>以配置文件方式启动</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">bin/mongod -f bin/mongodb.conf</span><br></pre></td></tr></table></figure>
+<p>如果要关闭同样尾部添加<code>--shutdown</code>即可</p>
+<h2 id="MongoDB函数关闭"><a href="#MongoDB函数关闭" class="headerlink" title="MongoDB函数关闭"></a>MongoDB函数关闭</h2><p>连接MongoDB服务后，切换admin数据库，并使用相关函数关闭服务</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#连接mongodb</span><br><span class="line">bin/mongo</span><br><span class="line">#切换admin数据库</span><br><span class="line">use admin</span><br><span class="line">#执行以下函数(2选1)即关闭服务</span><br><span class="line">db.shutdownServer()</span><br><span class="line">db.runCommand(&quot;shutdown&quot;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">vim /etc/profile</span><br><span class="line">#Mongodb ENVIRONMENT</span><br><span class="line">export MONGODB_HOME=/usr/local/mongodb</span><br><span class="line">#Path后面添加:MONGODB_HOME/bin</span><br><span class="line">#最后（:wq）保存，并source /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h1 id="MongoDB用户与权限管理"><a href="#MongoDB用户与权限管理" class="headerlink" title="MongoDB用户与权限管理"></a>MongoDB用户与权限管理</h1><h2 id="常用权限"><a href="#常用权限" class="headerlink" title="常用权限"></a>常用权限</h2><table>
+<thead>
+<tr>
+<th align="left">权限</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">read</td>
+<td align="left">允许用户读取指定数据库</td>
+</tr>
+<tr>
+<td align="left">readWrite</td>
+<td align="left">允许用户读写指定数据库</td>
+</tr>
+<tr>
+<td align="left">userAdmin</td>
+<td align="left">允许用户向system.users集合写入，可以在指定数据库里创建、删除和管理用户</td>
+</tr>
+<tr>
+<td align="left">dbAdmin</td>
+<td align="left">允许用户在指定数据库中执行管理函数，如索引创建、删除，查看统计或访问system.profile</td>
+</tr>
+<tr>
+<td align="left">clusterAdmin</td>
+<td align="left">必须在admin数据库中定义，赋予用户所有切片和复制集相关函数的管理权限</td>
+</tr>
+<tr>
+<td align="left">readAnyDatabase</td>
+<td align="left">必须在admin数据库中定义，赋予用户所有数据库读权限</td>
+</tr>
+<tr>
+<td align="left">readWriteAnyDatabase</td>
+<td align="left">必须在admin数据库中定义，赋予用户所有数据库读写权限</td>
+</tr>
+<tr>
+<td align="left">userAdminAnyDatabase</td>
+<td align="left">必须在admin数据库中定义，赋予用户所有数据库userAdmin权限</td>
+</tr>
+<tr>
+<td align="left">dbAdminAnyDatabase</td>
+<td align="left">必须在admin数据库中定义，赋予用户所有数据库dbAdmin权限</td>
+</tr>
+<tr>
+<td align="left">root</td>
+<td align="left">必须在admin数据库中定义，超级站账号，超级权限</td>
+</tr>
+</tbody></table>
+<h2 id="创建管理用户"><a href="#创建管理用户" class="headerlink" title="创建管理用户"></a>创建管理用户</h2><h3 id="切换数据库"><a href="#切换数据库" class="headerlink" title="切换数据库"></a>切换数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查看所有数据库</span><br><span class="line">show dbs</span><br><span class="line">#切换数据库</span><br><span class="line">use admin</span><br></pre></td></tr></table></figure>
+<h3 id="查看用户"><a href="#查看用户" class="headerlink" title="查看用户"></a>查看用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查看用户</span><br><span class="line">show users</span><br></pre></td></tr></table></figure>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#创建用户</span><br><span class="line">db.createUser(&#123;user:&quot;zzf&quot;,pwd:&quot;zzf&quot;,roles:[&#123;role:&quot;userAdminAnyDatabase&quot;,db:&quot;admin&quot;&#125;]&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在配置文件中添加如下信息，代表开启认证</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#开启身份认证</span><br><span class="line">auth=true</span><br></pre></td></tr></table></figure>
+
+<h3 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h3><h3 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mongo</span><br><span class="line">#切换admin数据库</span><br><span class="line">use admin</span><br><span class="line">#身份认证</span><br><span class="line">db.auth(&quot;zzf&quot;,&quot;zzf&quot;)</span><br><span class="line">#返回1代表认证成功，0认证失败</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="创建普通用户"><a href="#创建普通用户" class="headerlink" title="创建普通用户"></a>创建普通用户</h2><p>需求：创建一个test数据库，给这个数据库添加一个用户，用户名为testuser，密码为123456。并授予用户对test数据库的读写操作权限。</p>
+<h3 id="管理员登录数据库"><a href="#管理员登录数据库" class="headerlink" title="管理员登录数据库"></a>管理员登录数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mongo</span><br><span class="line">#切换admin数据库</span><br><span class="line">use admin</span><br><span class="line">#身份认证</span><br><span class="line">db.auth(&quot;zzf&quot;,&quot;zzf&quot;)</span><br><span class="line">#返回1代表认证成功，0认证失败</span><br></pre></td></tr></table></figure>
+<h3 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#如果没有数据库，通过use test 也会进行创建test数据库，并进入</span><br><span class="line">use test</span><br><span class="line">#查看当前所在数据库</span><br><span class="line">db</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="创建用户-1"><a href="#创建用户-1" class="headerlink" title="创建用户"></a>创建用户</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#创建用户</span><br><span class="line">db.createUser(&#123;user:&quot;testuser&quot;,pwd:&quot;123456&quot;,roles:[&#123;role:&quot;readWrite&quot;,db:&quot;test&quot;&#125;]&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="身份认证-1"><a href="#身份认证-1" class="headerlink" title="身份认证"></a>身份认证</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">use test</span><br><span class="line">#认证</span><br><span class="line">db.auth(&quot;testuser&quot;,&quot;123456&quot;)</span><br><span class="line">#数据添加</span><br><span class="line">db.user.insert(&#123;&quot;name&quot;:&quot;zhangsan&quot;&#125;)</span><br><span class="line">#数据查询</span><br><span class="line">db.user.find()</span><br><span class="line">--result:&#123; &quot;_id&quot; : ObjectId(&quot;6232d4333ed6a208fa727eee&quot;), &quot;name&quot; : &quot;zhangsan&quot; &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="更新用户"><a href="#更新用户" class="headerlink" title="更新用户"></a>更新用户</h2><h3 id="更新用户权限"><a href="#更新用户权限" class="headerlink" title="更新用户权限"></a>更新用户权限</h3><p>如果我们需要对已存在的角色进行角色修改，可以使用<code>db.updateUser()</code>函数来更新用户角色。注意：执行该函数需要当前用户具有<code>userAdmin</code>或<code>userAdminAmyDataBase</code>或<code>root</code>角色。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#更新用户权限</span><br><span class="line">db.updateUser(&quot;用户名&quot;,&#123;&quot;roles&quot;:[&#123;&quot;role&quot;:&quot;角色名称&quot;,db:&quot;数据库&quot;&#125;,&#123;&quot;更新项2&quot;:&quot;更新内容&quot;&#125;]&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="更新密码"><a href="#更新密码" class="headerlink" title="更新密码"></a>更新密码</h3><p>更新用户密码有以下两种方式，更新密码时需要切换到该用户所在数据库。注意：需要使用具有<code>userAdmin</code>或<code>userAdminAnyDatabase</code>或<code>root</code>角色的用户执行：</p>
+<ul>
+<li>使用<code>db.updateUser(&quot;用户名&quot;,&#123;&quot;pwd&quot;:&quot;新密码&quot;&#125;)</code>函数更新密码</li>
+<li>使用<code>db.changeUserPassword(&quot;用户名&quot;,&quot;新密码&quot;)</code>函数更新密码</li>
+</ul>
+<h2 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h2><p>通过<code>db.dropUser()</code>函数可以删除指定用户，删除成功以后会返回true。删除用户时需要切换到该用户所在的数据库。注意：需要使用具有<code>userAdmin</code>或<code>userAdmiAnyDatabase</code>或<code>root</code>角色的用户才可以删除其他用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mongo</span><br><span class="line">use admin</span><br><span class="line">db.auth(&quot;zzf&quot;,&quot;123456&quot;)</span><br><span class="line">use test</span><br><span class="line">show users</span><br><span class="line">#删除用户</span><br><span class="line">db.dropUser(&quot;testuser&quot;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="GUI"><a href="#GUI" class="headerlink" title="GUI"></a>GUI</h1><p>关于MongoDB的GUI有很多种，本学习使用Navicat 15</p>
+<h2 id="Navicat-15"><a href="#Navicat-15" class="headerlink" title="Navicat 15"></a>Navicat 15</h2><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317151936.png"></p>
+<h1 id="MongoDB的集合操作"><a href="#MongoDB的集合操作" class="headerlink" title="MongoDB的集合操作"></a>MongoDB的集合操作</h1><h2 id="Database操作"><a href="#Database操作" class="headerlink" title="Database操作"></a>Database操作</h2><h3 id="创建数据库-1"><a href="#创建数据库-1" class="headerlink" title="创建数据库"></a>创建数据库</h3><p>利用<code>use test</code>切换数据库，如果没有则创建并切换</p>
+<h3 id="查看数据库"><a href="#查看数据库" class="headerlink" title="查看数据库"></a>查看数据库</h3><blockquote>
+<p>PS:不同的角色显示的数据库不同</p>
+</blockquote>
+<p>使用<code>show dbs</code>或<code>show databases</code>查看所有数据库</p>
+<h3 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h3><p>删除数据库需要切换到需要删除的数据库中，且登录用户具有<code>dbAdminAnyDatabase</code>权限,执行<code>db.dropDatabase()</code></p>
+<h2 id="Collection操作"><a href="#Collection操作" class="headerlink" title="Collection操作"></a>Collection操作</h2><p>MongoDB中的集合是一组文档的集，相当于关系型数据库中的表(table)</p>
+<h3 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h3><p><code>db.table1</code>创建集合<br><code>db.table1.insert()</code>该指令可以创建集合并且插入文档</p>
+<p>MongoDB使用<code>db.createCollection()</code>函数来创建集合。<br>语法格式：<code>db.createCollection(name,option)</code>。</p>
+<ul>
+<li>name：要创建的集合名称</li>
+<li>option：可选参数，指定有关内存大小和索引的选项<br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317153428.png"></li>
+</ul>
+<h3 id="查看集合"><a href="#查看集合" class="headerlink" title="查看集合"></a>查看集合</h3><p><code>show tables</code>或<code>show collections</code>查看集合</p>
+<h3 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h3><p>通过<code>db.COLLECTION_NAME.drop()</code>删除集合</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#示例</span><br><span class="line">db.c1.drop()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Document操作"><a href="#Document操作" class="headerlink" title="Document操作"></a>Document操作</h2><h3 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h3><h4 id="单条插入"><a href="#单条插入" class="headerlink" title="单条插入"></a>单条插入</h4><p>可以使用<code>insert/insertOne/save</code>插入单条文档：</p>
+<ul>
+<li><code>db.c1.insert(&#123;&quot;name&quot;:&quot;a&quot;&#125;)</code></li>
+<li><code>db.c1.insertOne(&#123;&quot;name&quot;:&quot;a&quot;&#125;)</code></li>
+<li><code>db.c1.save(&#123;&quot;name&quot;:&quot;a&quot;&#125;)</code> 如果指定了<code>_id</code>字段则为修改【如果没有也为添加】，反之等同于<code>insert()</code>方法</li>
+</ul>
+<p>如果JSON格式的文档很长，我们也可以用一个变量操作</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#示例</span><br><span class="line">user1 = &#123;</span><br><span class="line">    &quot;name&quot;:&quot;zhangsan&quot;,</span><br><span class="line">    &quot;age&quot;:18,</span><br><span class="line">    &quot;hobbies&quot;:[&quot;music&quot;,&quot;read&quot;],</span><br><span class="line">    &quot;addr&quot;:&#123;</span><br><span class="line">        &quot;country&quot;:&quot;China&quot;,</span><br><span class="line">        &quot;city&quot;:&quot;BJ&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">db.user.insert(user1)</span><br></pre></td></tr></table></figure>
+<h4 id="批量插入"><a href="#批量插入" class="headerlink" title="批量插入"></a>批量插入</h4><p>可以使用<code>insert/insertMany/save</code>插入多条文档，区别在于把单挑插入时函数参数的对象类型<code>&#123;&#125;</code>变成数组类型<code>[&#123;&#125;,&#123;&#125;]</code>:</p>
+<ul>
+<li><code>db.c1.insert([&#123;name:&quot;a&quot;&#125;,&#123;name:&quot;b&quot;&#125;])</code></li>
+<li><code>db.c1.insertMany([&#123;name:&quot;a&quot;&#125;,&#123;name:&quot;b&quot;&#125;])</code></li>
+<li><code>db.c1.save([&#123;name:&quot;a&quot;&#125;,&#123;name:&quot;b&quot;&#125;])</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#示例代码</span><br><span class="line">user1 = &#123;</span><br><span class="line">    &quot;name&quot;:&quot;LiSA&quot;,</span><br><span class="line">    &quot;age&quot;:18,</span><br><span class="line">    &quot;hobbies&quot;:[&quot;music&quot;,&quot;read&quot;],</span><br><span class="line">    &quot;addr&quot;:&#123;</span><br><span class="line">        &quot;country&quot;:&quot;China&quot;,</span><br><span class="line">        &quot;city&quot;:&quot;BJ&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user2 = &#123;</span><br><span class="line">    &quot;name&quot;:&quot;BDYJY&quot;,</span><br><span class="line">    &quot;age&quot;:18,</span><br><span class="line">    &quot;hobbies&quot;:[&quot;music&quot;,&quot;read&quot;],</span><br><span class="line">    &quot;addr&quot;:&#123;</span><br><span class="line">        &quot;country&quot;:&quot;China&quot;,</span><br><span class="line">        &quot;city&quot;:&quot;BJ&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">user3 = &#123;</span><br><span class="line">    &quot;name&quot;:&quot;CJK&quot;,</span><br><span class="line">    &quot;age&quot;:18,</span><br><span class="line">    &quot;hobbies&quot;:[&quot;music&quot;,&quot;read&quot;],</span><br><span class="line">    &quot;addr&quot;:&#123;</span><br><span class="line">        &quot;country&quot;:&quot;China&quot;,</span><br><span class="line">        &quot;city&quot;:&quot;BJ&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">db.user.save([user1,user2,user3])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h3><p>通过<code>update</code>系列函数或则<code>save</code>函数可以更新集合中的文档。我们来详细看下<code>update</code>函数的使用，上面已经讲过<code>save</code>函数<br><code>update()</code>函数用于更新已存在的文档。语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.COLLECTION_NAME.update(query,update,options)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>query</code>:update的查询条件，类似SQL update 语法中的where部分</li>
+<li><code>update</code>:update的对象和一些更新的操作符(如$,$inc,$unset,$push,$pop,$pull,$pullAll,$rename)等，也可以理解为SQL update语法中的set部分。</li>
+<li><code>upsert</code>:可选，如果不存在update的文档，是否插入该文档。true为插入，默认是false，不插入。</li>
+<li><code>multi</code>:可选，是否批量更新。true表示按条件查询出来的多条记录全部更新，false只更新找到的第一条记录，默认是false。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#示例代码</span><br><span class="line">user = &#123;</span><br><span class="line">    &quot;name&quot;:&quot;wangwu&quot;,</span><br><span class="line">    &quot;age&quot;:18,</span><br><span class="line">    &quot;hobbies&quot;:[&quot;music&quot;,&quot;read&quot;],</span><br><span class="line">    &quot;addr&quot;:&#123;</span><br><span class="line">        &quot;country&quot;:&quot;China&quot;,</span><br><span class="line">        &quot;city&quot;:&quot;BJ&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 修改单条--全文档更新操作</span><br><span class="line">db.user.updateOne(&#123;&quot;name&quot;:&quot;LiSA&quot;&#125;,user)</span><br><span class="line"># 查找到的匹配数据如果是多条，只会修改第一条--全文档更新操作</span><br><span class="line">db.user.update(&#123;&quot;name&quot;:&quot;LiSA&quot;&#125;,user)#修改单条等价于 updateOne()</span><br><span class="line">#查找到的匹配数据如果是多条，修改所有匹配到的记录</span><br><span class="line">db.user.update(&#123;&quot;name&quot;:&quot;LiSA&quot;&#125;,&#123;&quot;$set&quot;:user&#125;,&#123;multi:true&#125;)#修改多条</span><br><span class="line">db.user.updateMany(&#123;&quot;name&quot;:&quot;张三1231231&quot;&#125;,&#123;&quot;$set&quot;:user&#125;)#修改多条</span><br><span class="line"></span><br><span class="line">#修改单条</span><br></pre></td></tr></table></figure>
+<h4 id="更新操作符"><a href="#更新操作符" class="headerlink" title="更新操作符"></a>更新操作符</h4><ul>
+<li><code>$set</code>操作符（需要记忆）<br><code>$set</code>操作符：用于指定一个键并更新键值，若键不存在并创建。<strong>只能修改第一个document</strong><br>语法格式：db.COLLECTION_NAMAE.update({查询条件},{更新操作符:{更新内容}})<br><code>$set</code>的作用总结：<ol>
+<li>只修改特定的Field，解决update默认修改整个document情况<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.c1.update(&#123;name:&quot;张三&quot;&#125;,&#123;$set:&#123;name:&quot;王五&quot;&#125;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>默认只修改符合条件第一个document，如果需要全部修改，添加更新参数multi:true<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.c1.update(&#123;name:&quot;张三&quot;&#125;,&#123;$set:&#123;name:&quot;王五&quot;&#125;&#125;,&#123;mutli:true&#125;)</span><br></pre></td></tr></table></figure></li>
+<li>如果Field不存在，可以新建一个Field<br>db.c1.update({name:”张三”},{$set:{sex”男”}})</li>
+</ol>
+</li>
+<li><code>$inc</code>操作符：可以对文档的某个值为数字型(<strong>只能为满足要求的数字</strong>)的键及增删操作。如果给定负数表示减少。<br>  把王五的年龄减少5岁  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.c1.update(&#123;name:&quot;王五&quot;&#125;,&#123;$inc:&#123;age:-5&#125;&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><code>$unset</code>操作符：主要是用来删除键。让键的值为空。在编写命令时$unset理field取任意值，无论给定什么值都表示删除。</li>
+<li><code>$push</code>操作符：向文档的某个数组类型的键添加一个数组元素，不过滤重复的数据。添加时键存在，要求键值类型必须是数组；键不存在，则创建数组类型的键。</li>
+<li><code>$pop</code>操作符：删除数据元素。可取只能是1或-1。1表示尾部删除，-1表示头部删除</li>
+<li><code>$pull</code>操作符：从数组中删除满足条件的元素，只要满足条件都删除</li>
+<li><code>$pullAll</code>操作符：可以设置多个条件</li>
+<li><code>$rename</code>操作符：对键盘进行重新命名。任何类型的键都能重命名。</li>
+</ul>
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><p>MongoDB remove()函数是用来移除集合中的数据，其语法格式如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.remove(&lt;query&gt;,&#123;justOne:&lt;boolean&gt;&#125;)</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li>query：(可选)删除的文档的条件。</li>
+<li>justOne:(可选)如果设为true，则只删除一个文档，False删除所有匹配的数据<br>等价于<code>db.user.deleteOne(&lt;query&gt;)</code>:删除符合条件的第一个文档<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.remove(&#123;&quot;name&quot;:&quot;lisa&quot;&#125;,&#123;justOne:true&#125;)</span><br><span class="line">db.user.deleteOne(&#123;&quot;name&quot;:&quot;lisa&quot;&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>删除所有数据命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.remove(&#123;&#125;)</span><br><span class="line">#等价于</span><br><span class="line">db.user.deleteMany(&#123;&#125;)#等于是清空该集合(表)</span><br></pre></td></tr></table></figure>
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><h4 id="查询所有"><a href="#查询所有" class="headerlink" title="查询所有"></a>查询所有</h4><p>MongoDB 查询数据的语法格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.find()#等同于db.user.find(&#123;&#125;)</span><br><span class="line">#去重</span><br><span class="line">db.user.distinct(&#x27;name&#x27;)</span><br></pre></td></tr></table></figure>
+<p>find()方法以非结构化的方式来显示所有文档<br>如果你需要以易读的方式来读取数据，可以使用pretty()方法，语法格式如下：<br>格式化-》返回的内容易读</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.find().pretty()</span><br></pre></td></tr></table></figure>
+<p>pretty()方法以格式化的方式来显示所有文档</p>
+<h4 id="比较运算"><a href="#比较运算" class="headerlink" title="比较运算"></a>比较运算</h4><p><strong>注意：在MongoDB中，用到方法逗得用$符号开头</strong><br>=，!=(‘$ne’)，&gt;(‘$gt’)，&lt;(‘$lt’)，&gt;=(‘$gte’)，&lt;=(‘$lte’)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1. select * from user where id = 3</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:3&#125;)</span><br><span class="line"></span><br><span class="line">#2. select * from user where id != 3</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:&#123;&quot;$ne&quot;:3&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#3. select * from user where id &gt; 3</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:&#123;&quot;$gt&quot;:3&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#4. select * from user where age &lt; 3</span><br><span class="line">db.user.find(&#123;&#x27;age&#x27;:&#123;&quot;$lt&quot;:3&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#5. select * from user where id &gt;= 3</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:&#123;&quot;$gte&quot;:3&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#6. select * from user where id &lt;= 3</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:&#123;&quot;$lte&quot;:3&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><p>MongoDB 中字典内用逗号分隔多个条件是and关系，或则直接用$and,$or,$not(与或非)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#逻辑运算：$and,$or,$not</span><br><span class="line">#1. select * from user where id &gt;=3 and id &lt;=4;</span><br><span class="line">db.user.find(&#123;_id:&#123;$gte:3,$lte:4&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#2. select * from user where id &gt;=3 and id &lt;=4 and age &gt;=4;</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;_id&quot;:&#123;$gte:3,$lte:4&#125;,</span><br><span class="line">    &quot;age&quot;:&#123;$gte:4&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;$and&quot;:[</span><br><span class="line">        &#123;&quot;_id&quot;:&#123;$gte:3,$lte:4&#125;&#125;,</span><br><span class="line">        &#123;&quot;age&quot;:&#123;$gte:4&#125;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#3. select * from user where id &gt;=0 and id&lt;=1 or name =&quot;LiSA&quot;;</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;$or&quot;:[</span><br><span class="line">        &#123;&quot;_id&quot;:&#123;$gte:0,$lte:1&#125;&#125;,</span><br><span class="line">        &#123;&quot;name&quot;:&quot;LiSA&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;$or&quot;:[</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;and&quot;:[</span><br><span class="line">                &#123;_id:&#123;$gte:0&#125;&#125;,</span><br><span class="line">                &#123;_id:&#123;$lte:1&#125;&#125;</span><br><span class="line">                ]</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;&quot;name&quot;:&quot;LiSA&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#4. select * from user where id%2=1;</span><br><span class="line">db.user.find(&#123;&quot;_id&quot;:&#123;$mod:[2,1]&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#上一条取反</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;_id&quot;:&#123;&quot;$not&quot;:&#123;&quot;$mod&quot;:[2,1]&#125;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="成员运算"><a href="#成员运算" class="headerlink" title="成员运算"></a>成员运算</h4><p>成员运算无非in 和 not in，MongoDB中形式为<code>$in</code>、<code>$nin</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1. select * from user where age in(1,2,3)</span><br><span class="line">db.user.find(&#123;&quot;age&quot;:&#123;$in:[1,2,3]&#125;&#125;)</span><br><span class="line"></span><br><span class="line">#2. select * from user where name not in (&quot;zhangsan&quot;,&quot;lisa&quot;)</span><br><span class="line">db.user.find(&#123;&quot;name&quot;:&#123;$nin:[&quot;zhangsan&quot;,&quot;lisa&quot;]&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="type操作符"><a href="#type操作符" class="headerlink" title="$type操作符"></a>$type操作符</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317222742.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询name是字符串类型的数据</span><br><span class="line">db.user.find(&#123;name:&#123;$type:2&#125;&#125;).pretty()</span><br></pre></td></tr></table></figure>
+<h4 id="正则"><a href="#正则" class="headerlink" title="正则"></a>正则</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1. select * from user where name regexp &#x27;^z.*?(u|i)$&#x27;;</span><br><span class="line">#匹配规则：z开头、n或u结尾，不区分大小写</span><br><span class="line">db.user.find(&#123;&#x27;name&#x27;:/^z.*?(u|i)$/i&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="投影"><a href="#投影" class="headerlink" title="投影"></a>投影</h4><p>MongoDB投影意思是只选择必要的数据而不是选择一整个文档的数据<br>在MongoDB中，当执行find()方法，那么它会显示一个文档所有字段。要限制这一点，需要设置字段列表值1或0</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#1. select name,age from user where id =3 ;</span><br><span class="line">db.user.find(&#123;&#x27;_id&#x27;:3&#125;,&#123;&#x27;_id&#x27;:0,&#x27;name&#x27;:1,&#x27;age&#x27;:1&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询数组相关</span><br><span class="line">#查hobbies中有dancing的人</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;hobbies&quot;:&quot;dancing&quot;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#查看既有dancing爱好又有tea爱好的人</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;hobbies&quot;:&#123;&quot;$all&quot;:[&quot;dancing&quot;,tea]&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#查看索引第2个爱好为dancing的人(索引从0开始计算)</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;hobbies.2&quot;:&quot;dancing&quot;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">#查看所有人的第1个到第3个爱好，第一个&#123;&#125;表示查询条件为所有，第二个是显示条件（左闭右开）</span><br><span class="line">db.user.find(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;_id&quot;:0,</span><br><span class="line">        &quot;name&quot;:0,</span><br><span class="line">        &quot;age&quot;:0,</span><br><span class="line">        &quot;addr&quot;:0,</span><br><span class="line">        &quot;hobbies&quot;:&#123;&quot;$slice&quot;:[0,2]&#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#查看所有人最后两个爱好，第一个&#123;&#125;表示查询条件为所有，第二个为显示条件</span><br><span class="line">db.user.find(</span><br><span class="line">    &#123;&#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;_id&quot;:0,</span><br><span class="line">        &quot;name&quot;:0,</span><br><span class="line">        &quot;age&quot;:0,</span><br><span class="line">        &quot;addr&quot;:0,</span><br><span class="line">        &quot;hobbies&quot;:&#123;&quot;$slice&quot;:-2&#125;</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">#查询子文档有&quot;country&quot;:&quot;China&quot;的人</span><br><span class="line">db.user.find(&#123;</span><br><span class="line">    &quot;addr.country&quot;:&quot;China&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><p>在MongoDB中使用sort()方法对数据进行排序，sort()可以通过参数指定排序的字段，并且使用1和-1来指定排序的方式，其中1为升序排列，而-1是用于降序排列</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#按姓名正序</span><br><span class="line">db.user.find().sort(&#123;&quot;name&quot;:1&#125;)</span><br><span class="line">#按年龄倒序，按id正序</span><br><span class="line">db.user.find().sort(&#123;&quot;age&quot;:1,&quot;_id&quot;:1&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><p>limit表示取多少个document，skip代表跳过几个document<br>分页公式：db.user.find().skip((pageNum-1)*pageSize).limit(pageSize)</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">db.user.find().limit(2).skip(0)#前2个</span><br><span class="line">db.user.find().limit(2).skip(2)#第三个和第四个</span><br><span class="line">db.user.find().limit(2).skip(4)#第五个和第六个</span><br></pre></td></tr></table></figure>
+
+<h4 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#查询_id大于3的人数</span><br><span class="line">#方式一</span><br><span class="line">db.user.count(&#123;&#x27;_id&#x27;:&#123;$gt:3&#125;&#125;)</span><br><span class="line">#方式二</span><br><span class="line">db.user.find(&#123;&quot;_id&quot;:&#123;$gt:3&#125;&#125;).count()</span><br></pre></td></tr></table></figure>
+<h3 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h3><p>我们在查询时肯定会用到聚合，在MongoDB中聚合为aggregate，聚合函数主要用到<code>$match</code>,<code>$group</code>,<code>$avg</code>,<code>$project</code>,<code>$concat</code>,可以加<code>$match</code>也可以不加<code>$match</code><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317230225.png"></p>
+<h4 id="Aggregate语法"><a href="#Aggregate语法" class="headerlink" title="Aggregate语法"></a>Aggregate语法</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317230817.png"></p>
+<h4 id="match和-group"><a href="#match和-group" class="headerlink" title="$match和$group"></a>$match和$group</h4><p>相当于sql语句的where和group by<br>{“$match”:{“字段”:”条件”}}，可以使用任何常用查询操作符$gt,$lt,$in等<br>{“$group”:{“_id”:分组字段，”新的字段名”:聚合操作符}}</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&#123;&quot;$match&quot;:&#123;&quot;字段&quot;:&quot;条件&quot;&#125;&#125;，可以使用任何常用查询操作符$gt,$lt,$in等</span><br><span class="line"></span><br><span class="line"># select * from db1.emp where post = &#x27;公务员&#x27;;</span><br><span class="line">db.emp.aggregate([&quot;$match&quot;:&#123;&quot;post&quot;:&quot;公务员&quot;&#125;])</span><br><span class="line"></span><br><span class="line"># select * from db1.emp where id &gt; 3 group by post;</span><br><span class="line">db.emp.aggregate([</span><br><span class="line">    &#123;&quot;$match&quot;:&#123;&quot;_id&quot;:&#123;&quot;$gt&quot;:3&#125;&#125;&#125;,</span><br><span class="line">    &#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$post&quot;,&quot;avg_salary&quot;:&#123;&quot;$avg&quot;:&quot;$salary&quot;&#125;&#125;&#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"># select * from db1.emp where id &gt; 3 group by post having avg(salary) &gt;10000</span><br><span class="line">db.emp.aggregate([</span><br><span class="line">    &#123;&quot;$match&quot;:&#123;&quot;_id&quot;:&#123;&quot;$gt&quot;:3&#125;&#125;&#125;,</span><br><span class="line">    &#123;&quot;$group&quot;:&#123;&quot;_id&quot;:&quot;$post&quot;,&quot;avg_salary&quot;:&#123;&quot;$avg&quot;:&quot;$salary&quot;&#125;&#125;&#125;,</span><br><span class="line">    &#123;&quot;$match&quot;:&#123;&quot;avg_salary:&#123;&quot;$gt&quot;:10000&#125;&quot;&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317232755.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233007.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233200.png"></p>
+<h4 id="project"><a href="#project" class="headerlink" title="$project"></a>$project</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233338.png"></p>
+<h4 id="sort和-limit和-skip"><a href="#sort和-limit和-skip" class="headerlink" title="$sort和$limit和$skip"></a>$sort和$limit和$skip</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233526.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233715.png"></p>
+<h4 id="sample"><a href="#sample" class="headerlink" title="$sample"></a>$sample</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233837.png"></p>
+<h4 id="concat和-substr和-toLower和-toUppper"><a href="#concat和-substr和-toLower和-toUppper" class="headerlink" title="$concat和$substr和$toLower和$toUppper"></a>$concat和$substr和$toLower和$toUppper</h4><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317233958.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317234217.png"></p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317234348.png"></p>
+<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317234437.png"></p>
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220317234653.png"></p>
+<h1 id="SpringDataMongoDB"><a href="#SpringDataMongoDB" class="headerlink" title="SpringDataMongoDB"></a>SpringDataMongoDB</h1><h2 id="创建一个SpringBoot的maven项目"><a href="#创建一个SpringBoot的maven项目" class="headerlink" title="创建一个SpringBoot的maven项目"></a>创建一个SpringBoot的maven项目</h2><h2 id="导入pom的依赖"><a href="#导入pom的依赖" class="headerlink" title="导入pom的依赖"></a>导入pom的依赖</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-mongodb&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="编写连接字符串"><a href="#编写连接字符串" class="headerlink" title="编写连接字符串"></a>编写连接字符串</h2><p>application.properties</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#application.properties的配置写法</span><br><span class="line">spring.data.mongodb.uri=mongodb://zzf:123456@hadoop105:27017/test?authSource=admin</span><br><span class="line"></span><br><span class="line">#application.yml的配置写法</span><br><span class="line">spring:</span><br><span class="line">  data:</span><br><span class="line">    mongodb:</span><br><span class="line">      host: hadoop105</span><br><span class="line">      username: &#x27;zzf&#x27;</span><br><span class="line">      password: &#x27;123456&#x27;</span><br><span class="line">      port: 27017</span><br><span class="line">      database: test</span><br><span class="line">      authentication-database: admin</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写一个实体类"><a href="#编写一个实体类" class="headerlink" title="编写一个实体类"></a>编写一个实体类</h2><table>
+<thead>
+<tr>
+<th align="left">注解</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">@Id</td>
+<td align="left">用于标记id字段，没有标记此字段的实体也会自动生成id字段，但是我们无法通过实体来获取id。id建议使用ObjectId类型来创建。</td>
+</tr>
+<tr>
+<td align="left">@Document</td>
+<td align="left">用于标记此实体类是mongodb集合映射类。可以使用collection参数指定集合名称。特别需要注意的是如果实体类没有为任何字段创建索引将不会自动创建集合。</td>
+</tr>
+<tr>
+<td align="left">@Indexed</td>
+<td align="left">用于标记为某一字段创建索引。direction参数可以指定排序方向，升或降序。</td>
+</tr>
+<tr>
+<td align="left">@CompoundIndex</td>
+<td align="left">用于创建复合索引。def参数可以定义复合索引的字段及排序方向。</td>
+</tr>
+<tr>
+<td align="left">@Transient</td>
+<td align="left">被该注解标注的，将不会被录入到数据库中。只作为普通的javaBean属性。</td>
+</tr>
+<tr>
+<td align="left">@PersistenceConstructor</td>
+<td align="left">用于声明构造函数，作用是把从数据库取出的数据实例化为对象。</td>
+</tr>
+<tr>
+<td align="left">@Field</td>
+<td align="left">用于指定某一个字段映射到数据库中的名称。</td>
+</tr>
+<tr>
+<td align="left">@DBRef</td>
+<td align="left">用于指定与其他集合的级联关系，但是需要注意的是并不会自动创建级联集合。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Document(&quot;user&quot;)</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Id</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String sex;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="编写一个dao接口继承MongoRepository-lt-实体类-主键类型-gt"><a href="#编写一个dao接口继承MongoRepository-lt-实体类-主键类型-gt" class="headerlink" title="编写一个dao接口继承MongoRepository&lt;实体类,主键类型&gt;"></a>编写一个dao接口继承MongoRepository&lt;实体类,主键类型&gt;</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserDao</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">User</span>,<span class="title">String</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><a target="_blank" rel="noopener" href="https://gitee.com/dgut_zzf/spring-data-mongo-db.git">案例学习git下载</a></p>
+<h1 id="SpringData规则"><a href="#SpringData规则" class="headerlink" title="SpringData规则"></a>SpringData规则</h1><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CommentRepository</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">Comment</span>,<span class="title">String</span> &gt; </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="function">Page&lt;Comment&gt; <span class="title">findByParentid</span><span class="params">(String parentid, Pageable pageable)</span></span>;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>想必大家在学习MongoDB会看到类似的接口，写着方法名，没有写相应实现类也没有对应xml就能实现调用。后来根据学习与探究发现底层是使用SpringData的规则应用，以下是学习记录。</p>
+</blockquote>
+<h2 id="方法命名规则查询"><a href="#方法命名规则查询" class="headerlink" title="方法命名规则查询"></a>方法命名规则查询</h2><blockquote>
+<p>顾名思义，方法命名规则查询就是根据方法的名字，就能创建查询。只需要按照SpringData JPA提供的方法。<br>命名规则定义方法的名称，就可以完成查询工作。<br>SpringData JPA在程序执行的时候会根据方法名称进行解析，并自动生成查询语句进行查询.<br>按照SpringData JPA定义的规则，查询方法以findBy开头，涉及条件查询时，条件的属性用条件关键字连接，要注意的是：条件属性首字母需大写。框架在进行方法名解析时，会先把方法名多余的前缀截取掉，然后对剩下部分进行解析 。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByTitle</span><span class="params">(String title)</span></span>;</span><br><span class="line"><span class="comment">//根据标题模糊查询</span></span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByTitleLike</span><span class="params">(String title)</span></span>;</span><br><span class="line"><span class="comment">//根据标题和作者查询</span></span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByTitleAndAuthor</span><span class="params">(String title, String author)</span></span>;</span><br><span class="line"><span class="comment">//根据ID范围查询</span></span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByAidBetween</span><span class="params">(Integer starAid, Integer endAid)</span></span>;</span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByAidLessThan</span><span class="params">(Integer endAid)</span></span>;</span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByAidIn</span><span class="params">(List&lt;Integer&gt; aids)</span></span>;</span><br><span class="line"><span class="comment">//根据创建时间之后查询</span></span><br><span class="line"><span class="function">List&lt;Article&gt; <span class="title">findByCreateTimeAfter</span><span class="params">(Date createTime)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220406114352.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220406114745.png"><br><img src="/img/mongoDB/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20220406121625.png"></p>
+<h2 id="定义查询方法"><a href="#定义查询方法" class="headerlink" title="定义查询方法"></a>定义查询方法</h2><p>存储库代理有两种从方法名称派生特定于 Store 的查询的方式：</p>
+<ul>
+<li>通过直接从方法名称派生查询。</li>
+<li>通过使用手动定义的查询。<br>可用选项取决于实际 Store。但是，必须有一个策略来决定要创建的实际查询。下一节将介绍可用的选项。</li>
+</ul>
+<h2 id="查询查询策略"><a href="#查询查询策略" class="headerlink" title="查询查询策略"></a>查询查询策略</h2><p>以下策略可用于存储库基础结构来解决查询。使用 XML 配置，您可以通过query-lookup-strategy属性在名称空间中配置策略。对于 Java 配置，可以使用Enable${store}Repositories注解的queryLookupStrategy属性。某些数据存储可能不支持某些策略。</p>
+<ul>
+<li>CREATE尝试从查询方法名称构造特定于 Store 的查询。通用方法是从方法名称中删除一组给定的众所周知的前缀，然后解析该方法的其余部分。您可以在“ Query Creation”中阅读有关查询构造的更多信息。</li>
+<li>USE_DECLARED_QUERY尝试查找已声明的查询，如果找不到则抛出异常。该查询可以通过某处的 Comments 定义，也可以通过其他方式声明。请查阅特定 Store 的文档以找到该 Store 的可用选项。如果存储库基础结构在引导时找不到该方法的声明查询，则它将失败。</li>
+<li>CREATE_IF_NOT_FOUND(默认)组合了CREATE和USE_DECLARED_QUERY。它首先查找一个声明的查询，如果找不到声明的查询，它将创建一个基于名称的自定义方法查询。这是默认的查找策略，因此，如果未显式配置任何内容，则使用该策略。它允许通过方法名称快速定义查询，还可以通过根据需要引入已声明的查询来自定义调整这些查询。</li>
+</ul>
+<h2 id="查询创建"><a href="#查询创建" class="headerlink" title="查询创建"></a>查询创建</h2><p>内置在 Spring Data 存储库基础结构中的查询构建器机制对于在存储库实体上构建约束查询很有用。该机制从方法中剥离前缀find…By，read…By，query…By，count…By和get…By，并开始解析其余部分。 Introduction 子句可以包含其他表达式，例如Distinct，以在要创建的查询上设置不同的标志。但是，第一个By充当分隔符，以指示实际标准的开始。在最基本的级别上，您可以定义实体属性的条件，并将它们与And和Or串联。以下示例显示了如何创建许多查询：</p>
+<p>例子 13.从方法名查询创建</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PersonRepository</span> <span class="keyword">extends</span> <span class="title">Repository</span>&lt;<span class="title">User</span>, <span class="title">Long</span>&gt; </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findByEmailAddressAndLastname</span><span class="params">(EmailAddress emailAddress, String lastname)</span></span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// Enables the distinct flag for the query</span></span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findDistinctPeopleByLastnameOrFirstname</span><span class="params">(String lastname, String firstname)</span></span>;</span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findPeopleDistinctByLastnameOrFirstname</span><span class="params">(String lastname, String firstname)</span></span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// Enabling ignoring case for an individual property</span></span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findByLastnameIgnoreCase</span><span class="params">(String lastname)</span></span>;</span><br><span class="line">  <span class="comment">// Enabling ignoring case for all suitable properties</span></span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findByLastnameAndFirstnameAllIgnoreCase</span><span class="params">(String lastname, String firstname)</span></span>;</span><br><span class="line"> </span><br><span class="line">  <span class="comment">// Enabling static ORDER BY for a query</span></span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findByLastnameOrderByFirstnameAsc</span><span class="params">(String lastname)</span></span>;</span><br><span class="line">  <span class="function">List&lt;Person&gt; <span class="title">findByLastnameOrderByFirstnameDesc</span><span class="params">(String lastname)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解析该方法的实际结果取决于您为其创建查询的持久性存储。但是，需要注意一些一般事项：</p>
+<p>表达式通常是属性遍历，并带有可串联的运算符。您可以将属性表达式与AND和OR结合使用。您还将获得对属性表达式的支持，例如Between，LessThan，GreaterThan和Like。支持的运算符可能因数据存储而异，因此请参考参考文档的相应部分。<br>方法解析器支持为单个属性(例如findByLastnameIgnoreCase(…))或支持忽略大小写的类型的所有属性(通常为String instance_，例如findByLastnameAndFirstnameAllIgnoreCase(…))设置IgnoreCase标志。是否支持忽略大小写可能因 Store 而异，因此请参考参考文档中有关 Store 特定查询方法的相关部分。<br>您可以通过将OrderBy子句附加到引用属性的查询方法并提供排序方向(Asc或Desc)来应用静态排序。要创建支持动态排序的查询方法，请参阅“ <a target="_blank" rel="noopener" href="https://www.docs4dev.com/docs/zh/spring-data-jpa/1.11.18.RELEASE/reference/all.html#repositories.special-parameters">特殊参数处理</a>”。</p>
+<h2 id="属性表达式"><a href="#属性表达式" class="headerlink" title="属性表达式"></a>属性表达式</h2><p>如上例所示，属性表达式只能引用被管实体的直接属性。在查询创建时，您已经确保已解析的属性是托管域类的属性。但是，您也可以通过遍历嵌套属性来定义约束。考虑以下方法签名：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">List&lt;Person&gt; <span class="title">findByAddressZipCode</span><span class="params">(ZipCode zipCode)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>假设Person具有Address和ZipCode。在这种情况下，该方法将创建属性遍历x.address.zipCode。解析算法首先将整个部分(AddressZipCode)解释为属性，然后在域类中检查具有该名称的属性(未大写)。如果算法成功，它将使用该属性。如果不是，该算法将驼峰案例部分的源从右侧分为头和尾，并尝试找到相应的属性，在我们的示例中为AddressZip和Code。如果该算法找到了具有该头部的属性，则将其取为尾部，并 continue 从此处开始构建树，以刚才描述的方式将尾部向上拆分。如果第一个分割不匹配，则算法将分割点移到左侧(Address，ZipCode)并 continue。</p>
+<p>尽管这在大多数情况下应该可行，但算法可能会选择错误的属性。假设Person类也具有addressZip属性。该算法将在第一轮拆分中已经匹配，选择错误的属性，然后失败(因为addressZip的类型可能没有code属性)。</p>
+<p>要解决这种歧义，您可以在方法名称中使用_来手动定义遍历点。因此，我们的方法名称如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">List&lt;Person&gt; <span class="title">findByAddress_ZipCode</span><span class="params">(ZipCode zipCode)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>因为我们将下划线字符视为保留字符，所以我们强烈建议您遵循以下标准 Java 命名约定(即，在属性名称中不使用下划线，而使用驼峰大小写)。</p>
+<h2 id="特殊参数处理"><a href="#特殊参数处理" class="headerlink" title="特殊参数处理"></a>特殊参数处理</h2><p>要处理查询中的参数，请定义方法参数，如前面的示例所示。除此之外，基础架构还可以识别某些特定类型(例如Pageable和Sort)，以将分页和排序动态应用于您的查询。下面的示例演示了这些功能：</p>
+<p>例子 14.在查询方法中使用Pageable，Slice和Sort</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">Page&lt;User&gt; <span class="title">findByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">Slice&lt;User&gt; <span class="title">findByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findByLastname</span><span class="params">(String lastname, Sort sort)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>第一种方法使您可以将org.springframework.data.domain.Pageable实例传递给查询方法，以将分页动态添加到静态定义的查询中。 Page知道可用元素和页面的总数。它是通过基础结构触发计数查询来计算总数来实现的。由于这可能很昂贵(取决于使用的 Store)，因此您可以返回Slice。 Slice仅知道下一个Slice是否可用，当遍历较大的结果集时可能就足够了。</p>
+<p>排序选项也通过Pageable实例处理。如果只需要排序，则将org.springframework.data.domain.Sort参数添加到您的方法中。如您所见，返回List也是可能的。在这种情况下，不会创建构建实际Page实例所需的其他元数据(这反过来，这意味着不会发出本来必要的其他计数查询)。而是，它将查询限制为仅查找给定范围的实体。</p>
+<p>要查明整个查询可获得多少页，您必须触发另一个计数查询。默认情况下，此查询源自您实际触发的查询。</p>
+<h2 id="限制查询结果"><a href="#限制查询结果" class="headerlink" title="限制查询结果"></a>限制查询结果</h2><p>可以使用first或top关键字来限制查询方法的结果，这些关键字可以互换使用。可以将一个可选的数值附加到top或first以指定要返回的最大结果大小。如果省略该数字，则假定结果大小为 1.以下示例显示了如何限制查询大小：</p>
+<p>例子 15.用Top和First限制查询的结果大小</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function">User <span class="title">findFirstByOrderByLastnameAsc</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">User <span class="title">findTopByOrderByAgeDesc</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">Page&lt;User&gt; <span class="title">queryFirst10ByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">Slice&lt;User&gt; <span class="title">findTop3ByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findFirst10ByLastname</span><span class="params">(String lastname, Sort sort)</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">List&lt;User&gt; <span class="title">findTop10ByLastname</span><span class="params">(String lastname, Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>限制表达式还支持Distinct关键字。此外，对于将结果集限制为一个实例的查询，支持使用Optional关键字将结果包装到其中。</p>
+<p>如果将分页或切片应用于限制查询分页(以及对可用页面数的计算)，则会在限制结果内应用分页或切片。</p>
+<p>通过使用Sort参数来限制结果与动态排序的组合，可以让您表达对最小的“ K”元素和对“ K”的最大元素的查询方法。</p>
+<h2 id="流查询结果"><a href="#流查询结果" class="headerlink" title="流查询结果"></a>流查询结果</h2><p>通过使用 Java 8 Stream<T>作为返回类型，可以递增地处理查询方法的结果。而不是将查询结果包装在Stream数据存储区中，而是使用特定于方法的方法来执行流传输，如以下示例所示：</p>
+<p>例子 16.用 Java 8 Stream<T>流式查询的结果</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Query(&quot;select u from User u&quot;)</span></span><br><span class="line"><span class="function">Stream&lt;User&gt; <span class="title">findAllByCustomQueryAndStream</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="function">Stream&lt;User&gt; <span class="title">readAllByFirstnameNotNull</span><span class="params">()</span></span>;</span><br><span class="line"> </span><br><span class="line"><span class="meta">@Query(&quot;select u from User u&quot;)</span></span><br><span class="line"><span class="function">Stream&lt;User&gt; <span class="title">streamAllPaged</span><span class="params">(Pageable pageable)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Stream可能包装了特定于底层数据存储的资源，因此在使用后必须将其关闭。您可以使用close()方法或使用 Java 7 try-with-resources块来手动关闭Stream，如以下示例所示：</p>
+<p>例子 17.使用Stream<T>导致 try-with-resources 块</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span> (Stream&lt;User&gt; stream = repository.findAllByCustomQueryAndStream()) &#123;</span><br><span class="line">  stream.forEach(…);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="异步查询结果"><a href="#异步查询结果" class="headerlink" title="异步查询结果"></a>异步查询结果</h2><p>可以使用Spring 的异步方法执行能力异步运行存储库查询。这意味着该方法在调用时立即返回，而实际查询执行发生在已提交给 Spring TaskExecutor的任务中。异步查询执行与反应式查询执行不同，因此不应混为一谈。有关响应式支持的更多详细信息，请参阅 Store 特定的文档。以下示例显示了许多异步查询：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Async</span><br><span class="line">Future&lt;User&gt; findByFirstname(String firstname);               (1)</span><br><span class="line"> </span><br><span class="line">@Async</span><br><span class="line">CompletableFuture&lt;User&gt; findOneByFirstname(String firstname); (2)</span><br><span class="line"> </span><br><span class="line">@Async</span><br><span class="line">ListenableFuture&lt;User&gt; findOneByLastname(String lastname);    (3)</span><br></pre></td></tr></table></figure>
+<p>(1) 使用java.util.concurrent.Future作为返回类型。<br>(2) 使用 Java 8 java.util.concurrent.CompletableFuture作为返回类型。<br>(3) 使用org.springframework.util.concurrent.ListenableFuture作为返回类型。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:541039648@qq.com">Kirito</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://dgut-zzf.github.io/2022/03/16/MongoDB/">https://dgut-zzf.github.io/2022/03/16/MongoDB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://dgut-zzf.github.io" target="_blank">傻瓜の博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/MongoDB/">MongoDB</a><a class="post-meta__tags" href="/tags/DataBase/">DataBase</a></div><div class="post_share"><div class="social-share" data-image="/img/avatar/%E8%9D%B6%E7%A5%882.gif" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/04/22/%E8%87%AA%E5%8A%A8%E6%B3%A8%E5%85%A5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8C%BA%E5%88%AB/"><img class="prev-cover" src="https://dgut-zzf.github.io/img/background/0e2442a7d933c8955b3ef3d7d31373f0830200dd.gif" onerror="onerror=null;src='/img/background/0e2442a7d933c8955b3ef3d7d31373f0830200dd.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">自动注入的三种方式以及区别</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/24/Spark%E5%AD%A6%E4%B9%A0-Scala/"><img class="next-cover" src="https://dgut-zzf.github.io/img/background/0e2442a7d933c8955b3ef3d7d31373f0830200dd.gif" onerror="onerror=null;src='/img/background/0e2442a7d933c8955b3ef3d7d31373f0830200dd.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Spark学习--Scala</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Centos7%E5%AE%89%E8%A3%85mongodb"><span class="toc-number">1.</span> <span class="toc-text">Centos7安装mongodb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%BE%80%E5%AE%98%E7%BD%91%E4%B8%8B%E8%BD%BDmongodb%E7%9A%84tgz%E5%8C%85"><span class="toc-number">1.1.</span> <span class="toc-text">前往官网下载mongodb的tgz包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E8%87%B3%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%90%E7%9B%AE%E5%BD%95%E8%87%AA%E9%80%89%E3%80%91"><span class="toc-number">1.2.</span> <span class="toc-text">上传至服务器【目录自选】</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9B%AE%E5%BD%95"><span class="toc-number">1.3.</span> <span class="toc-text">创建数据库目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E5%8F%B0%E5%90%AF%E5%8A%A8"><span class="toc-number">1.4.</span> <span class="toc-text">前台启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E5%8F%B0%E5%90%AF%E5%8A%A8"><span class="toc-number">1.5.</span> <span class="toc-text">后台启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.6.</span> <span class="toc-text">配置文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB%E5%87%BD%E6%95%B0%E5%85%B3%E9%97%AD"><span class="toc-number">1.7.</span> <span class="toc-text">MongoDB函数关闭</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">1.8.</span> <span class="toc-text">配置环境变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">MongoDB用户与权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%9D%83%E9%99%90"><span class="toc-number">2.1.</span> <span class="toc-text">常用权限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7"><span class="toc-number">2.2.</span> <span class="toc-text">创建管理用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.2.1.</span> <span class="toc-text">切换数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%94%A8%E6%88%B7"><span class="toc-number">2.2.2.</span> <span class="toc-text">查看用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7"><span class="toc-number">2.2.3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.4.</span> <span class="toc-text">重启服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81"><span class="toc-number">2.2.5.</span> <span class="toc-text">身份认证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7"><span class="toc-number">2.3.</span> <span class="toc-text">创建普通用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%A1%E7%90%86%E5%91%98%E7%99%BB%E5%BD%95%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.3.1.</span> <span class="toc-text">管理员登录数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">2.3.2.</span> <span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%94%A8%E6%88%B7-1"><span class="toc-number">2.3.3.</span> <span class="toc-text">创建用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81-1"><span class="toc-number">2.3.4.</span> <span class="toc-text">身份认证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-number">2.4.</span> <span class="toc-text">更新用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90"><span class="toc-number">2.4.1.</span> <span class="toc-text">更新用户权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E5%AF%86%E7%A0%81"><span class="toc-number">2.4.2.</span> <span class="toc-text">更新密码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7"><span class="toc-number">2.5.</span> <span class="toc-text">删除用户</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GUI"><span class="toc-number">3.</span> <span class="toc-text">GUI</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Navicat-15"><span class="toc-number">3.1.</span> <span class="toc-text">Navicat 15</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MongoDB%E7%9A%84%E9%9B%86%E5%90%88%E6%93%8D%E4%BD%9C"><span class="toc-number">4.</span> <span class="toc-text">MongoDB的集合操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Database%E6%93%8D%E4%BD%9C"><span class="toc-number">4.1.</span> <span class="toc-text">Database操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93-1"><span class="toc-number">4.1.1.</span> <span class="toc-text">创建数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.1.2.</span> <span class="toc-text">查看数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">4.1.3.</span> <span class="toc-text">删除数据库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collection%E6%93%8D%E4%BD%9C"><span class="toc-number">4.2.</span> <span class="toc-text">Collection操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E9%9B%86%E5%90%88"><span class="toc-number">4.2.1.</span> <span class="toc-text">创建集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%9B%86%E5%90%88"><span class="toc-number">4.2.2.</span> <span class="toc-text">查看集合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E9%9B%86%E5%90%88"><span class="toc-number">4.2.3.</span> <span class="toc-text">删除集合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Document%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.</span> <span class="toc-text">Document操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%96%87%E6%A1%A3"><span class="toc-number">4.3.1.</span> <span class="toc-text">插入文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%95%E6%9D%A1%E6%8F%92%E5%85%A5"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">单条插入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">批量插入</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%96%87%E6%A1%A3"><span class="toc-number">4.3.2.</span> <span class="toc-text">更新文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">更新操作符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E6%A1%A3"><span class="toc-number">4.3.3.</span> <span class="toc-text">删除文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%96%87%E6%A1%A3"><span class="toc-number">4.3.4.</span> <span class="toc-text">查询文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89"><span class="toc-number">4.3.4.1.</span> <span class="toc-text">查询所有</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E8%BF%90%E7%AE%97"><span class="toc-number">4.3.4.2.</span> <span class="toc-text">比较运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97"><span class="toc-number">4.3.4.3.</span> <span class="toc-text">逻辑运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%88%90%E5%91%98%E8%BF%90%E7%AE%97"><span class="toc-number">4.3.4.4.</span> <span class="toc-text">成员运算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#type%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="toc-number">4.3.4.5.</span> <span class="toc-text">$type操作符</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A3%E5%88%99"><span class="toc-number">4.3.4.6.</span> <span class="toc-text">正则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8A%95%E5%BD%B1"><span class="toc-number">4.3.4.7.</span> <span class="toc-text">投影</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E7%BB%84"><span class="toc-number">4.3.4.8.</span> <span class="toc-text">数组</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%92%E5%BA%8F"><span class="toc-number">4.3.4.9.</span> <span class="toc-text">排序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E9%A1%B5"><span class="toc-number">4.3.4.10.</span> <span class="toc-text">分页</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1"><span class="toc-number">4.3.4.11.</span> <span class="toc-text">统计</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%81%9A%E5%90%88"><span class="toc-number">4.3.5.</span> <span class="toc-text">聚合</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Aggregate%E8%AF%AD%E6%B3%95"><span class="toc-number">4.3.5.1.</span> <span class="toc-text">Aggregate语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#match%E5%92%8C-group"><span class="toc-number">4.3.5.2.</span> <span class="toc-text">$match和$group</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#project"><span class="toc-number">4.3.5.3.</span> <span class="toc-text">$project</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sort%E5%92%8C-limit%E5%92%8C-skip"><span class="toc-number">4.3.5.4.</span> <span class="toc-text">$sort和$limit和$skip</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sample"><span class="toc-number">4.3.5.5.</span> <span class="toc-text">$sample</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#concat%E5%92%8C-substr%E5%92%8C-toLower%E5%92%8C-toUppper"><span class="toc-number">4.3.5.6.</span> <span class="toc-text">$concat和$substr和$toLower和$toUppper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95"><span class="toc-number">4.4.</span> <span class="toc-text">索引</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-number">4.4.1.</span> <span class="toc-text">创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E7%B4%A2%E5%BC%95"><span class="toc-number">4.4.2.</span> <span class="toc-text">查询索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-number">4.4.3.</span> <span class="toc-text">删除索引</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringDataMongoDB"><span class="toc-number">5.</span> <span class="toc-text">SpringDataMongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AASpringBoot%E7%9A%84maven%E9%A1%B9%E7%9B%AE"><span class="toc-number">5.1.</span> <span class="toc-text">创建一个SpringBoot的maven项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5pom%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="toc-number">5.2.</span> <span class="toc-text">导入pom的依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E8%BF%9E%E6%8E%A5%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">5.3.</span> <span class="toc-text">编写连接字符串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%AE%9E%E4%BD%93%E7%B1%BB"><span class="toc-number">5.4.</span> <span class="toc-text">编写一个实体类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AAdao%E6%8E%A5%E5%8F%A3%E7%BB%A7%E6%89%BFMongoRepository-lt-%E5%AE%9E%E4%BD%93%E7%B1%BB-%E4%B8%BB%E9%94%AE%E7%B1%BB%E5%9E%8B-gt"><span class="toc-number">5.5.</span> <span class="toc-text">编写一个dao接口继承MongoRepository&lt;实体类,主键类型&gt;</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">5.6.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringData%E8%A7%84%E5%88%99"><span class="toc-number">6.</span> <span class="toc-text">SpringData规则</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%E6%9F%A5%E8%AF%A2"><span class="toc-number">6.1.</span> <span class="toc-text">方法命名规则查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="toc-number">6.2.</span> <span class="toc-text">定义查询方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%9F%A5%E8%AF%A2%E7%AD%96%E7%95%A5"><span class="toc-number">6.3.</span> <span class="toc-text">查询查询策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E5%88%9B%E5%BB%BA"><span class="toc-number">6.4.</span> <span class="toc-text">查询创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">6.5.</span> <span class="toc-text">属性表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E5%8F%82%E6%95%B0%E5%A4%84%E7%90%86"><span class="toc-number">6.6.</span> <span class="toc-text">特殊参数处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C"><span class="toc-number">6.7.</span> <span class="toc-text">限制查询结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C"><span class="toc-number">6.8.</span> <span class="toc-text">流查询结果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E6%AD%A5%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C"><span class="toc-number">6.9.</span> <span class="toc-text">异步查询结果</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Kirito</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://dgut-zzf.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="放大字体"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="缩小字体"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="简繁转换">简</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (true){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '2c4096047dcd6a9afc51',
+      clientSecret: 'fdb7e0ab87224c10429e215faee82c6ed9a0b9b3',
+      repo: 'dgut-zzf.github.io',
+      owner: 'dgut-zzf',
+      admin: ['dgut-zzf'],
+      id: '33c04ca590af6e53d0cd9a773c54a858',
+      language: 'en',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><div class="aplayer no-destroy" data-id="7530393082" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script>((window.gitter = {}).chat = {}).options = {
+  disableDefaultChat: true,
+};
+document.addEventListener('gitter-sidecar-ready', (e) => {
+  const GitterChat = e.detail.Chat
+  let chat
+
+  function initGitter () {
+    chat = new GitterChat({
+      room: 'zzf-blog/community',
+      activationElement: '#chat_btn'
+    });
+  }
+
+  initGitter()
+
+  if (true) {
+    document.addEventListener('pjax:complete', () => {
+      chat.destroy()
+      initGitter()
+    })
+  }
+
+})</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async="async" defer="defer"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="/music/"]):not([href="/no-pjax/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', 'G-2MDKV7YRZQ', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":145,"height":315},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body></html>
